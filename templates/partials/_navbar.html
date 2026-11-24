@@ -1,0 +1,45 @@
+{% load static %}
+<header class="navbar" id="site-navbar">
+    <div class="navbar__inner container">
+        <a class="brand" href="{% url 'core:home' %}" aria-label="Pecados Sabor del Cielo - Inicio">
+            <img
+                class="brand__logo"
+                src="{% static 'img/logo-pecados.png' %}"
+                alt="Logo Pecados Sabor del Cielo"
+            >
+            <span class="brand__text">
+                <span class="brand__title">PECADOS</span>
+                <span class="brand__sub">SABOR DEL CIELO</span>
+            </span>
+        </a>
+
+        <nav class="navbar__nav" id="primary-nav" aria-label="Navegación principal">
+            <a class="navbar__link {% if request.resolver_match.url_name == 'home' %}is-active{% endif %}" href="{% url 'core:home' %}">Inicio</a>
+            <a class="navbar__link {% if request.resolver_match.app_name == 'productos' %}is-active{% endif %}" href="{% url 'productos:lista' %}">Menú</a>
+            <a class="navbar__link" href="{% url 'core:home' %}#nuestra-historia">Nuestra Historia</a>
+            <a class="navbar__link {% if request.resolver_match.app_name == 'pedidos' %}is-active{% endif %}" href="{% url 'pedidos:lista' %}">Pedidos</a>
+            <a class="navbar__link {% if request.resolver_match.app_name == 'usuarios' %}is-active{% endif %}" href="{% url 'usuarios:perfil' %}">Mi Cuenta</a>
+        </nav>
+
+        <div class="navbar__actions">
+            <a class="navbar__icon-btn" href="{% url 'pedidos:lista' %}" aria-label="Ver pedido actual">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+                    <path d="M3 6h18"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+                <span class="cart-badge" id="cart-count">0</span>
+            </a>
+
+            <a class="btn btn--light" href="{% url 'pedidos:lista' %}">Hacer Pedido</a>
+
+            <button class="navbar__toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <line x1="4" y1="7" x2="20" y2="7"/>
+                    <line x1="4" y1="12" x2="20" y2="12"/>
+                    <line x1="4" y1="17" x2="20" y2="17"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Pecados Sabor del Cielo | Café de Especialidad y Repostería Artesanal{% endblock %}
+{% block body_class %}is-landing{% endblock %}
+
+{% block full_content %}
+<main>
+    <!-- Hero Editorial -->
+    <section class="hero" aria-label="Presentación principal">
+        <div class="hero__media">
+            <img
+                class="hero__image"
+                src="{% static 'img/hero-cafe.jpg' %}"
+                alt="Interior acogedor de Pecados Sabor del Cielo con barra de café y luz cálida"
+            >
+            <div class="hero__overlay"></div>
+        </div>
+
+        <div class="container hero__inner">
+            <div class="hero__content">
+                <span class="eyebrow">Café de Especialidad · Repostería Artesanal</span>
+                <h1 class="hero__title">
+                    Más que un<br>
+                    dulce<br>
+                    <span class="hero__accent">pecado.</span>
+                </h1>
+                <p class="hero__subtitle">
+                    Granos cuidadosamente seleccionados, sabores de temporada y repostería horneada cada mañana en un espacio cálido para bajar el ritmo.
+                </p>
+
+                <div class="hero__actions">
+                    <a class="btn btn--dark" href="#menu-favoritos">
+                        Explorar el Menú
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 12h14"/>
+                            <path d="m12 5 7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a class="story-play" href="#nuestra-historia">
+                        <span class="story-play__circle" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="6 4 20 12 6 20 6 4"/>
+                            </svg>
+                        </span>
+                        Conoce Nuestra Historia
+                    </a>
+                </div>
+
+                <div class="hero__stats" aria-label="Indicadores de la marca">
+                    {% for stat in hero_stats %}
+                    <div class="stat">
+                        <span class="stat__value">{{ stat.value }}</span>
+                        <span class="stat__label">{{ stat.label }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <p class="hero__script" aria-hidden="true">
+                Buen Café,<br>
+                Dulces Pecados
+            </p>
+        </div>
+    </section>
+
+    <!-- Favoritos de Temporada -->
+    <section class="section" id="menu-favoritos">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <span class="eyebrow">Nuestro Menú</span>
+                    <h2 class="section-head__title">Favoritos de temporada.</h2>
+                </div>
+                <p class="section-head__desc">
+                    Elaborados con dedicación e ingredientes frescos. Desde clásicos reconfortantes hasta creaciones de temporada, hay un sabor perfecto para cada antojo.
+                </p>
+                <a class="btn btn--outline" href="{% url 'productos:lista' %}">
+                    Ver Menú Completo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14"/>
+                        <path d="m12 5 7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="menu-grid">
+                {% for item in featured_products %}
+                <article class="menu-card">
+                    <img
+                        class="menu-card__img"
+                        src="{% static item.image %}"
+                        alt="{{ item.name }}"
+                        loading="lazy"
+                    >
+                    <div class="menu-card__scrim"></div>
+                    <div class="menu-card__body">
+                        <span class="menu-card__category">{{ item.category }}</span>
+                        <h3 class="menu-card__name">{{ item.name }}</h3>
+                        <p class="menu-card__notes">{{ item.notes }}</p>
+                        <div class="menu-card__footer">
+                            <span class="menu-card__price">{{ item.price }}</span>
+                            <button
+                                class="menu-card__add"
+                                type="button"
+                                data-add-item="{{ item.name }}"
+                                aria-label="Agregar {{ item.name }} al pedido"
+                            >+</button>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Nuestra Historia (3 Paneles Editoriales) -->
+    <section class="story-band" id="nuestra-historia" aria-label="Nuestra historia">
+        <div class="story-band__dark">
+            <span class="eyebrow">Nuestra Historia</span>
+            <h2 class="story-band__title">Un espacio para buena compañía.</h2>
+            <p class="story-band__text">
+                Pecados Sabor del Cielo nació de una idea sencilla: el buen café y un postre inolvidable acercan a las personas. Creamos un rincón acogedor para conversaciones sinceras, tardes tranquilas y momentos que saben a cielo.
+            </p>
+            <a class="btn btn--outline-light" href="{% url 'productos:lista' %}">
+                Descubrir el Menú
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14"/>
+                    <path d="m12 5 7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="story-band__photo">
+            <img
+                src="{% static 'img/story-table.jpg' %}"
+                alt="Taza de latte artesanal sobre mesa de madera bañada en luz cálida"
+                loading="lazy"
+            >
+        </div>
+
+        <div class="story-band__quote">
+            <p class="story-band__stack">
+                BUEN CAFÉ<br>
+                DULCES PECADOS<br>
+                BUENA COMPAÑÍA
+            </p>
+            <span class="story-band__divider" aria-hidden="true"></span>
+            <p class="story-band__motto">
+                Siempre un<br>
+                Sabor del Cielo.
+            </p>
+        </div>
+    </section>
+
+    <!-- Pilares de Marca -->
+    <section class="pillars" aria-label="Nuestros valores">
+        <div class="container">
+            <div class="pillars__grid">
+                <div class="pillar">
+                    <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                    </svg>
+                    <div>
+                        <h3 class="pillar__title">Origen Sostenible</h3>
+                        <p class="pillar__desc">Granos seleccionados de fincas responsables.</p>
+                    </div>
+                </div>
+
+                <div class="pillar">
+                    <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 2c2 3 5 4.5 5 9a5 5 0 1 1-10 0c0-2.5 1.5-4.5 3-6 0 2 1 3 2 3 0-2 0-4 0-6Z"/>
+                    </svg>
+                    <div>
+                        <h3 class="pillar__title">Horneo Diario</h3>
+                        <p class="pillar__desc">Repostería fresca preparada cada mañana.</p>
+                    </div>
+                </div>
+
+                <div class="pillar">
+                    <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    <div>
+                        <h3 class="pillar__title">Espacios Acogedores</h3>
+                        <p class="pillar__desc">Un ambiente cálido diseñado para compartir.</p>
+                    </div>
+                </div>
+
+                <div class="pillar">
+                    <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
+                        <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+                        <line x1="6" x2="6" y1="2" y2="4"/>
+                        <line x1="10" x2="10" y1="2" y2="4"/>
+                        <line x1="14" x2="14" y1="2" y2="4"/>
+                    </svg>
+                    <div>
+                        <h3 class="pillar__title">Bebidas de Autor</h3>
+                        <p class="pillar__desc">Recetas de temporada creativas y memorables.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
